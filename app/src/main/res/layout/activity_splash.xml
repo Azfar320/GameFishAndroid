@@ -17,7 +17,7 @@
         android:id="@+id/titlename"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Fish Game \n\n\n\nDeveloped By\nAhnaf habib Azfar"
+        android:text="Fish Game \n\n\nDeveloped By\nAhnaf habib Azfar"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:textStyle="bold"
