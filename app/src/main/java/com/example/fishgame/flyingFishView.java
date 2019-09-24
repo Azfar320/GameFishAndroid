@@ -19,6 +19,22 @@ public class flyingFishView extends View
     private int fishSpeed;
     private int canvasWidth, canvasHeight;
 
+    private int yellowX, yellowY, yellowSpeed = 16;
+    private Paint yellowPaint = new Paint();
+
+    private int greenX, greenY, greenSpeed = 16;
+    private Paint greenPaint = new Paint();
+
+    private int redX, redY, redSpeed = 20;
+    private Paint redPaint = new Paint();
+
+
+
+
+
+    private int score;
+
+
     private boolean touch = false;
 
 
@@ -35,8 +51,26 @@ public class flyingFishView extends View
 
 
         backgroundImage = BitmapFactory.decodeResource(getResources(),R.drawable.background);
+
+        yellowPaint.setColor(Color.YELLOW);
+        yellowPaint.setAntiAlias(false);
+
+
+        greenPaint.setColor(Color.GREEN);
+        greenPaint.setAntiAlias(false);
+
+
+        redPaint.setColor(Color.RED);
+        redPaint.setAntiAlias(false);
+
+
+
+
+
+
+
         scorepaint.setColor(Color.WHITE);
-        scorepaint.setTextSize(70);
+        scorepaint.setTextSize(50);
         scorepaint.setTypeface(Typeface.DEFAULT_BOLD);
         scorepaint.setAntiAlias(true);
 
@@ -44,6 +78,7 @@ public class flyingFishView extends View
         life[1] = BitmapFactory.decodeResource(getResources(),R.drawable.heart_grey);
 
         fishY = 550;
+        score = 0;
     }
 
     @Override
@@ -74,12 +109,63 @@ public class flyingFishView extends View
             canvas.drawBitmap(fish[0], fishX, fishY, null);
         }
 
-        canvas.drawText("Score : ", 20, 60, scorepaint);
+
+
+        yellowX = yellowX - yellowSpeed;
+        if (hitBallChecker(yellowX,yellowY)){
+            score = score + 10;
+            yellowX = -100;
+        }
+
+        if (yellowX<0){
+            yellowX = canvasWidth + 21;
+            yellowY = (int) Math.floor(Math.random() * (maxFishY - minFishY)) + minFishY;
+        }
+        canvas.drawCircle(yellowX,yellowY,20,yellowPaint);
+
+        greenX = greenX - greenSpeed;
+        if (hitBallChecker(greenX,greenY)){
+            score = score + 20;
+            greenX = -100;
+        }
+
+        if (greenX<0){
+            greenX = canvasWidth + 21;
+            greenY = (int) Math.floor(Math.random() * (maxFishY - minFishY)) + minFishY;
+        }
+        canvas.drawCircle(greenX,greenY,20,greenPaint);
+
+
+        redX = redX - redSpeed;
+        if (hitBallChecker(redX,redY)){
+            redX = -100;
+        }
+
+        if (redX<0){
+            redX = canvasWidth + 21;
+            redY = (int) Math.floor(Math.random() * (maxFishY - minFishY)) + minFishY;
+        }
+        canvas.drawCircle(redX,redY,25,redPaint);
+
+
+
+
+        canvas.drawText("Score : "+score, 20, 60, scorepaint);
 
         canvas.drawBitmap(life[0],400,10,null);
         canvas.drawBitmap(life[0],500,10,null);
         canvas.drawBitmap(life[0],600,10,null);
     }
+
+
+    public boolean hitBallChecker(int x, int y){
+        if (fishX<x && x<(fishX + fish[0].getWidth()) && fishY<y && y<(fishY + fish[0].getHeight())){
+            return  true;
+        }
+        return  false;
+    }
+
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
