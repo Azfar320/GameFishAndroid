@@ -16,7 +16,7 @@
         android:textColor="@color/colorAccent"
         android:textStyle="italic"
         android:textSize="45sp" />
-    
+
     <Button
         android:id="@+id/play_again_btn"
         android:layout_width="150dp"
@@ -30,5 +30,17 @@
         android:textColor="@android:color/background_light"
         android:textSize="20sp"
         android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/displayScore"
+        android:layout_below="@+id/play_again_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Score"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textStyle="italic"
+        android:textSize="30sp" />
 
 </RelativeLayout>

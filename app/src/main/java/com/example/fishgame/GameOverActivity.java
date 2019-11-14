@@ -5,17 +5,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class GameOverActivity extends AppCompatActivity {
 
     private Button StartGameAgain;
+    private TextView DisplayScore;
+    private String Score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
 
+        Score = getIntent().getExtras().get("score").toString();
+
         StartGameAgain = (Button) findViewById(R.id.play_again_btn);
+        DisplayScore = (TextView) findViewById(R.id.displayScore);
 
         StartGameAgain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -25,5 +31,7 @@ public class GameOverActivity extends AppCompatActivity {
 
             }
         });
+
+        DisplayScore.setText("Score = "+ Score);
     }
 }
